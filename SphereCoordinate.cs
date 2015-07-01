@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SphereCoordinate {
+public class SphereCoordinate : PolarCoordinate{
 	public float longitude;
 	public float latitude;
 	public float magnitude;
@@ -25,7 +25,7 @@ public class SphereCoordinate {
 		magnitude = 0;
 	}
 
-	public Vector3 toVector3(){
+	public override Vector3 toVector3(){
 		float x = magnitude * Mathf.Cos(latitude * Mathf.Deg2Rad);
 		float y = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Cos(longitude * Mathf.Deg2Rad);
 		float z = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Sin(longitude * Mathf.Deg2Rad);
