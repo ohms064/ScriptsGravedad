@@ -17,20 +17,16 @@ public class Rotacion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-			//sphCoord.magnitude -= gravedad;
-			// if(Physics.Raycast(rayo, out hit, (this.GetComponent<CapsuleCollider>().height / 2) + offset)){
-			// 	print("Suelo!");
-			// 	print(hit.distance);
-			// }else{
-			// 	sphCoord.magnitude -= gravedad;
-			// }
+			
+			print("Longitude: " + sphCoord.longitude);
+			print("Latitude: " + sphCoord.latitude);
+
 			sphCoord.updateVar();
 
 			sphCoord.longitude += Input.GetAxis("Vertical") * velocidad;
 			sphCoord.latitude += Input.GetAxis("Horizontal") * velocidad;
 			this.GetComponent<Rigidbody>().position = sphCoord.toVector3();
-			//this.transform.localEulerAngles = new Vector3(sphCoord.longitude, 0, sphCoord.latitude);
-			this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(sphCoord.longitude, 0, sphCoord.latitude);
+			this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(sphCoord.longitude, 0, sphCoord.latitude - 90f);
 
 
 	}
