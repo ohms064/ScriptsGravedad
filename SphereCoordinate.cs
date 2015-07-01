@@ -26,9 +26,9 @@ public class SphereCoordinate : PolarCoordinate{
 	}
 
 	public override Vector3 toVector3(){
-		float x = magnitude * Mathf.Cos(latitude * Mathf.Deg2Rad);
+		float x = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Sin(longitude * Mathf.Deg2Rad);
 		float y = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Cos(longitude * Mathf.Deg2Rad);
-		float z = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Sin(longitude * Mathf.Deg2Rad);
+		float z = magnitude * Mathf.Cos(latitude * Mathf.Deg2Rad);
 		return new Vector3(x, y, z);
 	}
 }
