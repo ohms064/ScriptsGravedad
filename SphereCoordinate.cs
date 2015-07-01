@@ -25,6 +25,20 @@ public class SphereCoordinate : PolarCoordinate{
 		magnitude = 0;
 	}
 
+	public void updateVar(){
+		if (longitude > 360f) {
+			longitude -= 360f;
+		}else if (longitude < -360f) {
+			longitude += 360f;
+		}
+
+		if (latitude > 360f) {
+			longitude -= 360f;
+		}else if (latitude < -360f) {
+			longitude += 360f;
+		}
+	}
+
 	public override Vector3 toVector3(){
 		float x = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Sin(longitude * Mathf.Deg2Rad);
 		float y = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad) * Mathf.Cos(longitude * Mathf.Deg2Rad);
