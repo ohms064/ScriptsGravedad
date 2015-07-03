@@ -17,18 +17,16 @@ public class Rotacion : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-			
 			print("Longitude: " + sphCoord.longitude);
 			print("Latitude: " + sphCoord.latitude);
+			print("Valido: " + sphCoord.valido);
 
-			sphCoord.updateVar();
-
-			sphCoord.longitude += Input.GetAxis("Vertical") * velocidad;
-			sphCoord.latitude += Input.GetAxis("Horizontal") * velocidad;
+			sphCoord.latitude += Input.GetAxis("Vertical") * velocidad;
+			sphCoord.longitude += Input.GetAxis("Horizontal") * velocidad;
 			this.GetComponent<Rigidbody>().position = sphCoord.toVector3();
 			this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(sphCoord.longitude, 0, sphCoord.latitude - 90f);
 
-
+			sphCoord.updateVar();
 	}
 
 }

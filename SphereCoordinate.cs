@@ -5,6 +5,7 @@ public class SphereCoordinate : PolarCoordinate{
 	public float longitude;
 	public float latitude;
 	public float magnitude;
+	public float valido = 0f;
 
 	public SphereCoordinate (Vector3 vector) {
 		Vector2 ro = new Vector2(vector.x, vector.z);
@@ -26,16 +27,21 @@ public class SphereCoordinate : PolarCoordinate{
 	}
 
 	public void updateVar(){
+		valido = 0f;
 		if (longitude > 360f) {
+			valido += 1f;
 			longitude -= 360f;
 		}else if (longitude < 0f) {
 			longitude += 360f;
+			valido -= 1f;
 		}
 
 		if (latitude > 360f) {
-			longitude -= 360f;
+			valido += 10f;
+			latitude -= 360f;
 		}else if (latitude < 0f) {
-			longitude += 360f;
+			latitude += 360f;
+			valido -= 10f;
 		}
 	}
 
