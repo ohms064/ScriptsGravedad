@@ -12,7 +12,7 @@ public class Rotacion : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		sphCoord = new SphereCoordinate(this.transform.position);
+		sphCoord = new SphereCoordinate(this.GetComponent<Rigidbody>().position);
 	}
 	
 	// Update is called once per frame
@@ -24,7 +24,9 @@ public class Rotacion : MonoBehaviour {
 			sphCoord.latitude += Input.GetAxis("Vertical") * velocidad;
 			sphCoord.longitude += Input.GetAxis("Horizontal") * velocidad;
 			this.GetComponent<Rigidbody>().position = sphCoord.toVector3();
-			this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(sphCoord.longitude, 0, sphCoord.latitude - 90f);
+			this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(0f, -1 * sphCoord.longitude, sphCoord.latitude - 90f);
+			//this.GetComponent<Rigidbody>().rotation = Quaternion.Euler(sphCoord.longitude, 0f, sphCoord.latitude - 90f);
+			//this.GetComponent<Rigidbody>().AddRelativeForce(this.transform.up * -1f);
 
 			sphCoord.updateVar();
 	}
