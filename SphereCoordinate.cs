@@ -5,19 +5,27 @@ public class SphereCoordinate : PolarCoordinate{
 	public float longitude;
 	public float latitude;
 	public float magnitude;
-	public float valido = 0f;
 
 	public SphereCoordinate (Vector3 vector) {
-		Vector2 ro = new Vector2(vector.x, vector.z);
 		magnitude = vector.magnitude;
-		if(ro.magnitude == 0f){
-			longitude = 0;
-			latitude = 90f;
+		if (vector.x == 0) {
+			if (vector.z == 0f) {
+				longitude = 0f;	
+			}else if (vector.z > 0f) {
+				longitude = 90f;
+			}else {
+				longitude = -90f;
+			}
+		}else {
+			longitude = Mathf.Atan(vector.z / vector.x) * Mathf.Rad2Deg;	
 		}
-		else{
-			longitude = Mathf.Acos(vector.x / ro.magnitude) * Mathf.Rad2Deg;
-			latitude = Mathf.Acos(ro.magnitude / magnitude) * Mathf.Rad2Deg;
+		latitude = Mathf.Asin(vector.y / magnitude) * Mathf.Rad2Deg;
+		if (vector.x < 0f && vector.z < 0f ) {
+			longitude += 270f;
+		}else if (vector.x < 0f) {
+			longitude += 180f;
 		}
+		
 	}
 	
 	public SphereCoordinate () {
@@ -26,26 +34,37 @@ public class SphereCoordinate : PolarCoordinate{
 		magnitude = 0;
 	}
 
-	public void updateVar(){
-		valido = 0f;
+	public void UpdateVar(){
 		if (longitude > 360f) {
-			valido += 1f;
 			longitude -= 360f;
 		}else if (longitude < 0f) {
 			longitude += 360f;
-			valido -= 1f;
-		}
-
-		if (latitude > 360f) {
-			valido += 10f;
-			latitude -= 360f;
-		}else if (latitude < 0f) {
-			latitude += 360f;
-			valido -= 10f;
 		}
 	}
 
-	public override Vector3 toVector3(){
+	public void UpdateCoord(Vector3 vector){
+		magnitude = vector.magnitude;
+		if (vector.x == 0) {
+			if (vector.z == 0f) {
+				longitude = 0f;	
+			}else if (vector.z > 0f) {
+				longitude = 90f;
+			}else {
+				longitude = -90f;
+			}
+		}else {
+			longitude = Mathf.Atan(vector.z / vector.x) * Mathf.Rad2Deg;	
+		}
+		latitude = Mathf.Asin(vector.y / magnitude) * Mathf.Rad2Deg;
+		if (vector.x < 0f && vector.z < 0f ) {
+			longitude += 270f;
+		}else if (vector.x < 0f) {
+			longitude += 180f;
+		}
+		
+	}
+
+	public override Vector3 ToVector3(){
 		float ro = magnitude *Mathf.Cos(latitude * Mathf.Deg2Rad); 
 		float x = ro * Mathf.Cos(longitude * Mathf.Deg2Rad);
 		float y = magnitude * Mathf.Sin(latitude * Mathf.Deg2Rad);

@@ -3,5 +3,5 @@ using System.Collections;
 
 public abstract class PolarCoordinate {
 
-	public abstract Vector3 toVector3();
+	public abstract Vector3 ToVector3();
 }
